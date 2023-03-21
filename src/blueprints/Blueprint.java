@@ -3,6 +3,7 @@ package blueprints;
 import java.util.HashMap;
 
 public abstract class Blueprint {
+    final float pi = 3.14f;
     public enum Color {
         WHITE,
         BLACK,
