@@ -1,5 +1,7 @@
-import materials.Door;
-import materials.Material;
+import employees.*;
+import materials.*;
+
+import java.util.ArrayList;
 
 public class Tests {
 
@@ -37,5 +39,63 @@ public class Tests {
         //door3 = d;
         ((Door)door3).setWindow(false);
         System.out.println(door3);
+    }
+
+    public static void testEmployees() {
+        try {
+            Employee e = new HR(null, null);
+            System.out.println(e);
+            System.out.println(e.getClass().getName());
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        ArrayList<Employee> employees = new ArrayList();
+
+        Employee hr = new HR("Yuriy", "B.");
+        System.out.println(hr);
+        System.out.println(hr.getClass().getName());
+        employees.add(hr);
+
+        Employee worker = new Worker("Markus", "R.");
+        System.out.println(worker);
+        System.out.println(worker.getClass().getName());
+        employees.add(worker);
+        //sound
+        //((Worker)worker).work();
+
+        Employee architect = new Architect("Steffen", "H.");
+        System.out.println(architect);
+        System.out.println(architect.getClass().getName());
+        employees.add(architect);
+
+        Employee buyer = new Buyer("Pascal", "W.");
+        System.out.println(buyer);
+        System.out.println(buyer.getClass().getName());
+        employees.add(buyer);
+
+        Employee wm = new WorkerManager("Marco", "R.");
+        System.out.println(wm);
+        System.out.println(wm.getClass().getName());
+        employees.add(wm);
+
+        for (int i = 0; i < employees.size(); i++) {
+            System.out.println("=========================");
+            Employee ee = employees.get(i);
+            System.out.println(ee);
+        }
+
+        for (Employee emp : employees) {
+            System.out.println("=========================");
+            System.out.println(emp);
+
+            String workerClassName = Worker.class.getSimpleName();
+            String empClassName = emp.getClass().getSimpleName();
+            if (empClassName.equals(workerClassName)) {
+                ((Worker)emp).work();
+            }
+        }
+
+        System.out.println(buyer.getClass().getSimpleName());
     }
 }
