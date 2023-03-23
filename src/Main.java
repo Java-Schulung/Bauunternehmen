@@ -1,37 +1,30 @@
+import company.ConstructionCompany;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        //Tests.testMaterial();
-        Tests.testEmployees();
-    }
-/*
-    static {
-        new Thread(new Runnable() {
-            // The wrapper thread is unnecessary, unless it blocks on the
-            // Clip finishing; see comments.
-            public void run() {
-                try
-                {
-                    File f = new File("sounds/wc3-peon-says-work-work-only-.wav");
-                    Clip clip = AudioSystem.getClip();
-                    clip.open(AudioSystem.getAudioInputStream(f));
-                    clip.start();
-                } catch (Exception exc) {
-                    exc.printStackTrace(System.out);
-                }
-            }
-        }).start();
+        String companyName = "PokemonSolo GmbH";
+        String managingDirectorName = "Yuriy Be.";
+        String hrName = "Patric Ka.";
         try {
-            Thread.sleep(2000);
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
-        }
-    }
+            ConstructionCompany myCompany =
+                    new ConstructionCompany(companyName, managingDirectorName);
 
- */
+            System.out.println(myCompany.getCompanyName());
+            System.out.println(myCompany.getEmployees());
+
+            myCompany.hireHR(hrName);
+
+        } catch (NullPointerException | StringIndexOutOfBoundsException ex) {
+            System.out.println(ex.getMessage());
+        }
+        //Tests.testMaterial();
+        //Tests.testEmployees();
+    }
 }
