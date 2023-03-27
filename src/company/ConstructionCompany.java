@@ -3,6 +3,7 @@ package company;
 import blueprints.Blueprint;
 import employees.Employee;
 import employees.ManagingDirector;
+import utilities.MyUtils;
 
 import java.util.ArrayList;
 
@@ -27,20 +28,14 @@ public class ConstructionCompany {
         this.setManagingDirector(directorName);
     }
 
-    private String[] validateName(String employeeType, String employeeName)
+    private String[] splittName(String employeeType, String employeeName)
             throws NullPointerException, StringIndexOutOfBoundsException {
-        if (employeeName == null || employeeName.isBlank()) {
-            throw new NullPointerException("ERROR: " + employeeType + " name is empty or null!");
-        }
+        MyUtils.validateName(employeeName);
 
         String[] name = employeeName.split(" ");
-        if (name.length != 2) {
-            throw new StringIndexOutOfBoundsException("ERROR: The name must contain first and last name!");
-        }
-
         String firstname = name[0];
         String lastname = name[1];
-        if (firstname.length() <= 2 || lastname.length() <= 2) {
+        if (firstname.length() < 2 || lastname.length() < 2) {
             throw new StringIndexOutOfBoundsException(
                     "ERROR: " + employeeType + " first or last name should have at least 2 characters!");
         }
@@ -50,7 +45,7 @@ public class ConstructionCompany {
 
     public void hireHR(String hrName)
             throws NullPointerException, StringIndexOutOfBoundsException {
-        String[] name = this.validateName("HR", hrName);
+        String[] name = this.splittName("HR", hrName);
 
         Employee hr = this.getManagingDirector().hireHR(name[0], name[1]);
         if (hr != null) {
@@ -71,12 +66,7 @@ public class ConstructionCompany {
      */
     private void setCompanyName(String companyName)
             throws NullPointerException, StringIndexOutOfBoundsException {
-        if (companyName == null || companyName.isBlank()){
-            throw new NullPointerException("ERROR: Company name is empty or null!");
-        }
-        if (companyName.length() < 3) {
-            throw new StringIndexOutOfBoundsException("ERROR: Company should have at least 3 characters!");
-        }
+        MyUtils.validateCompanyName(companyName);
         this.companyName = companyName;
     }
 
@@ -93,7 +83,7 @@ public class ConstructionCompany {
      */
     private void setManagingDirector(String managingDirectorName)
             throws NullPointerException, StringIndexOutOfBoundsException {
-        String[] name = this.validateName("Managing Director", managingDirectorName);
+        String[] name = this.splittName("Managing Director", managingDirectorName);
 
         this.managingDirector = new ManagingDirector(name[0], name[1]);
         this.employees.add(this.getManagingDirector());

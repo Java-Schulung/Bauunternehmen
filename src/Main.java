@@ -1,24 +1,18 @@
 import company.ConstructionCompany;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
+import ui.Terminal;
 
 public class Main {
     public static void main(String[] args) {
-        String companyName = "PokemonSolo GmbH";
-        String managingDirectorName = "Yuriy Be.";
-        String hrName = "Patric Ka.";
         try {
+            String companyName = Terminal.requireCompanyName();
+            String managingDirectorName = Terminal.requireManagerName();
             ConstructionCompany myCompany =
                     new ConstructionCompany(companyName, managingDirectorName);
 
             System.out.println(myCompany.getCompanyName());
             System.out.println(myCompany.getEmployees());
 
+            String hrName = Terminal.requireHRName();
             myCompany.hireHR(hrName);
 
         } catch (NullPointerException | StringIndexOutOfBoundsException ex) {
