@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ConstructionCompany {
     private String companyName;
     private Employee managingDirector;
-    private ArrayList<Employee> employees;
+    private ArrayList<Employee> employeeDB;
     private ArrayList<Blueprint> blueprints;
     private ArrayList<Object> orders;
 
@@ -19,7 +19,7 @@ public class ConstructionCompany {
         //found company name
         this.setCompanyName(companyName);
         //initialize employee list
-        this.employees = new ArrayList<>();
+        this.employeeDB = new ArrayList<>();
         //
         this.blueprints = new ArrayList<>();
         //
@@ -49,10 +49,14 @@ public class ConstructionCompany {
 
         Employee hr = this.getManagingDirector().hireHR(name[0], name[1]);
         if (hr != null) {
-            this.getEmployees().add(hr);
+            this.getEmployeeDB().add(hr);
         } else {
             throw new NullPointerException("ERROR: " + hrName + " was not hired!");
         }
+    }
+
+    public void hireEmployees() {
+
     }
 
     public String getCompanyName() {
@@ -86,15 +90,15 @@ public class ConstructionCompany {
         String[] name = this.splittName("Managing Director", managingDirectorName);
 
         this.managingDirector = new ManagingDirector(name[0], name[1]);
-        this.employees.add(this.getManagingDirector());
+        this.employeeDB.add(this.getManagingDirector());
     }
 
-    public ArrayList<Employee> getEmployees() {
-        return employees;
+    public ArrayList<Employee> getEmployeeDB() {
+        return employeeDB;
     }
 
-    public void setEmployees(ArrayList<Employee> employees) {
-        this.employees = employees;
+    public void setEmployeeDB(ArrayList<Employee> employeeDB) {
+        this.employeeDB = employeeDB;
     }
 
     public ArrayList<Blueprint> getBlueprints() {

@@ -1,9 +1,35 @@
 import employees.*;
 import materials.*;
+import utilities.Recruter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tests {
+
+    public static void testNameGenerator() {
+        for(int i = 0; i < 10; i++) {
+            System.out.println(Arrays.toString(Recruter.recrutePerson()));
+        }
+    }
+
+    public static void testEmployment() {
+        Employee e1 = new Worker("Yuriy", "B.");
+        Employee e2 = new Worker("Yuriy", "B.");
+        Employee e3 = new Architect("Yuriy", "B.");
+
+        ArrayList<Employee> db = new ArrayList<>();
+
+        HR.addNewEmployee(e1, db);
+        try {
+            HR.addNewEmployee(e2, db);
+        } catch (IllegalStateException ex) {
+            System.out.println(ex.getMessage());
+        }
+        HR.addNewEmployee(e3, db);
+
+        System.out.println(db);
+    }
 
     public static void testMaterial() {
         Material material = new Door("Eingangstür", 1000.00, "Holz");

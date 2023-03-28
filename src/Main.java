@@ -1,8 +1,14 @@
 import company.ConstructionCompany;
 import ui.Terminal;
+import utilities.Recruter;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        Tests.testNameGenerator();
+        Tests.testEmployment();
+
         try {
             String companyName = Terminal.requireCompanyName();
             String managingDirectorName = Terminal.requireManagerName();
@@ -10,7 +16,7 @@ public class Main {
                     new ConstructionCompany(companyName, managingDirectorName);
 
             System.out.println(myCompany.getCompanyName());
-            System.out.println(myCompany.getEmployees());
+            System.out.println(myCompany.getEmployeeDB());
 
             String hrName = Terminal.requireHRName();
             myCompany.hireHR(hrName);
