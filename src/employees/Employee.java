@@ -56,13 +56,22 @@ public abstract class Employee {
         }
     }
 
+    public boolean equalsEmployee(Employee employee) {
+        return this.employeeId.equals(employee.getEmployeeId())
+                && this.firstname.equals(employee.getFirstname())
+                && this.lastname.equals(employee.getLastname());
+    }
+
     @Override
     public boolean equals(Object obj) {
         try {
-            Employee e = (Employee) obj;
-            return this.employeeId.equals(e.getEmployeeId())
-                    && this.firstname.equals(e.getFirstname())
-                    && this.lastname.equals(e.getLastname());
+            if (obj instanceof Employee) {
+
+                Employee e = (Employee) obj;
+                return e.getClass().getSimpleName().equals(this.getClass().getSimpleName())
+                        && this.firstname.equals(e.getFirstname())
+                        && this.lastname.equals(e.getLastname());
+            }
         } catch (NullPointerException | ClassCastException ex) {
             System.out.println("Wrong type");
         }
@@ -71,7 +80,7 @@ public abstract class Employee {
 
     @Override
     public String toString() {
-        return "Employee:"
+        return "\nEmployee:"
                 + "\nID: " + employeeId
                 + "\nFirst name: " + firstname
                 + "\nLast name: " + lastname

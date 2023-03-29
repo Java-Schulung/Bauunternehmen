@@ -7,6 +7,26 @@ import java.util.Arrays;
 
 public class Tests {
 
+    public static void testInstanceOf() {
+        Object employee1 = new HR("sdfasdf", "adfasdfsadf");
+        System.out.println(employee1 instanceof Integer);
+        //employee1.getClass() => HR.class
+        //Material.getClass() => Material.class
+        //HR.class == Material.class
+        System.out.println(employee1 instanceof Material);
+        System.out.println(employee1 instanceof HR);
+        System.out.println(employee1 instanceof Employee);
+
+        Employee e1 = new WorkerManager("asdf", "asdfsadf");
+        System.out.println(e1 instanceof Employee);
+        System.out.println(e1 instanceof Worker);
+        System.out.println(e1 instanceof WorkerManager);
+        System.out.println(e1 instanceof Architect);
+
+        Employee e2 = new Worker("test1", "test2");
+        System.out.println(e2 instanceof WorkerManager);
+    }
+
     public static void testNameGenerator() {
         for(int i = 0; i < 10; i++) {
             System.out.println(Arrays.toString(Recruter.recrutePerson()));
@@ -27,6 +47,24 @@ public class Tests {
             System.out.println(ex.getMessage());
         }
         HR.addNewEmployee(e3, db);
+
+        System.out.println(db);
+    }
+
+    public static void testEmployment_manual() {
+        Employee e1 = new Worker("Yuriy", "B.");
+        Employee e2 = new Worker("Yuriy", "B.");
+        Employee e3 = new Architect("Yuriy", "B.");
+
+        ArrayList<Employee> db = new ArrayList<>();
+
+        HR.addNewEmployee_manual(e1, db);
+        try {
+            HR.addNewEmployee_manual(e2, db);
+        } catch (IllegalStateException ex) {
+            System.out.println(ex.getMessage());
+        }
+        HR.addNewEmployee_manual(e3, db);
 
         System.out.println(db);
     }

@@ -59,6 +59,20 @@ public class HR extends Employee {
             Employee newEmployee, ArrayList<Employee> employeeDB)
             throws IllegalStateException {
 
+        if (employeeDB.contains(newEmployee)) {
+
+            throw new IllegalStateException(
+                    "ERROR: Employee already exists!"
+                            + newEmployee);
+        }
+
+        return employeeDB.add(newEmployee);
+    }
+
+    public static boolean addNewEmployee_manual(
+            Employee newEmployee, ArrayList<Employee> employeeDB)
+            throws IllegalStateException {
+
         for(Employee emp: employeeDB) {
 
             String f = emp.getFirstname();
@@ -69,18 +83,11 @@ public class HR extends Employee {
                     && p.equals(newEmployee.getClass().getSimpleName())) {
 
                 throw new IllegalStateException(
-                        "ERROR: Employee already exists!\n"
+                        "ERROR: Employee already exists!"
                                 + newEmployee);
             }
         }
-        /*
-        if (employeeDB.contains(newEmployee)) {
 
-            throw new IllegalStateException(
-                    "ERROR: Employee already exists!"
-                            + newEmployee.toString());
-        }
-        */
         return employeeDB.add(newEmployee);
     }
 

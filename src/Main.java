@@ -1,4 +1,7 @@
 import company.ConstructionCompany;
+import employees.Employee;
+import employees.HR;
+import materials.Material;
 import ui.Terminal;
 import utilities.Recruter;
 
@@ -6,8 +9,11 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Tests.testNameGenerator();
+
+        //Tests.testInstanceOf();
+        //Tests.testNameGenerator();
         Tests.testEmployment();
+        Tests.testEmployment_manual();
 
         try {
             String companyName = Terminal.requireCompanyName();
