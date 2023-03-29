@@ -28,12 +28,12 @@ public class Tests {
     }
 
     public static void testNameGenerator() {
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.println(Arrays.toString(Recruter.recrutePerson()));
         }
     }
 
-    public static void testEmployment() {
+    public static void testEmployment() throws Exception {
         Employee e1 = new Worker("Yuriy", "B.");
         Employee e2 = new Worker("Yuriy", "B.");
         Employee e3 = new Architect("Yuriy", "B.");
@@ -51,7 +51,7 @@ public class Tests {
         System.out.println(db);
     }
 
-    public static void testEmployment_manual() {
+    public static void testEmployment_manual() throws Exception {
         Employee e1 = new Worker("Yuriy", "B.");
         Employee e2 = new Worker("Yuriy", "B.");
         Employee e3 = new Architect("Yuriy", "B.");
@@ -101,7 +101,7 @@ public class Tests {
         //Door d = (Door) door3;
         //d.setWindow(false);
         //door3 = d;
-        ((Door)door3).setWindow(false);
+        ((Door) door3).setWindow(false);
         System.out.println(door3);
     }
 
@@ -156,7 +156,7 @@ public class Tests {
             String workerClassName = Worker.class.getSimpleName();
             String empClassName = emp.getClass().getSimpleName();
             if (empClassName.equals(workerClassName)) {
-                ((Worker)emp).work();
+                ((Worker) emp).work();
             }
         }
 
