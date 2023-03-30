@@ -1,5 +1,7 @@
 package materials;
 
+import company.MaterialStock;
+
 public abstract class Material {
 
     private String name;
@@ -10,6 +12,12 @@ public abstract class Material {
         this.name = name;
         this.price = price;
         this.type = type;
+    }
+
+    public Material(Material material) {
+        this.name = material.getName();
+        this.price = material.getPrice();
+        this.type = material.getType();
     }
 
     public String getName() {
@@ -38,7 +46,7 @@ public abstract class Material {
 
     @Override
     public String toString() {
-        return "Material: " + this.name
+        return "\nMaterial: " + this.name
                 + "\nType: " + this.type
                 + "\nPrice: " + this.price;
     }

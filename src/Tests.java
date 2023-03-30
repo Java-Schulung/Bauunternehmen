@@ -1,11 +1,87 @@
+import company.MaterialStock;
 import employees.*;
 import materials.*;
 import utilities.Recruter;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Tests {
+
+    public static boolean containsKey(HashMap<MaterialStock, Integer> shoppingList, Object key) {
+        if (key instanceof Material) {
+            //Option #1
+            for (int i = 0; i < shoppingList.size(); i++) {
+                return shoppingList.keySet().contains(key);
+            }
+            //Option #2
+            for (MaterialStock m : shoppingList.keySet()) {
+                if (m.equals(key)) {
+                    return true;
+                }
+            }
+            //Option #3
+            for (MaterialStock m : shoppingList.keySet()) {
+                if (m.equals(key)) return true;
+            }
+            //Option #4
+            for (MaterialStock m : shoppingList.keySet()) {
+                return m.equals(key);
+            }
+            //Option #cheater
+            return shoppingList.keySet().contains(key);
+        }
+        return false;
+    }
+
+    public static void testBuyMaterials() throws Exception {
+        HashMap<MaterialStock, Integer> shoppingList = new HashMap<>();
+        shoppingList.put(MaterialStock.BRICKSTONE, 1);
+        shoppingList.put(MaterialStock.SWITCH, 100);
+        shoppingList.put(MaterialStock.DOOR_WITH_WINDOW, 1);
+        shoppingList.put(MaterialStock.DOOR_WITHOUT_WINDOW, 10);
+        shoppingList.put(MaterialStock.CABLE, 1000);
+
+        //duplicate test
+        shoppingList.put(MaterialStock.BRICKSTONE, 10);
+        System.out.println(shoppingList);
+        System.out.println(shoppingList.keySet());
+        System.out.println(shoppingList.values());
+        System.out.println(shoppingList.containsKey(MaterialStock.BRICKSTONE));
+        System.out.println(shoppingList.containsKey(MaterialStock.CHIMNEY));
+        System.out.println(shoppingList.containsValue(1000));
+        System.out.println(shoppingList.containsValue(new Integer(1000)));
+        Integer i = new Integer(5);
+        System.out.println(shoppingList.containsValue(i));
+        System.out.println(i);
+        //our own contains key function
+        boolean contains = containsKey(shoppingList, MaterialStock.CHIMNEY);
+        System.out.println("Contains " + MaterialStock.CHIMNEY + ": " + contains);
+
+        //Buyer e = new Buyer("asdfa", "asdf");
+        Employee e1 = new Buyer("asdfa", "asdf");
+        Buyer buyer = (Buyer) e1;
+
+        HashMap<Material, Integer> l = buyer.buyMaterial(shoppingList);
+        System.out.println(l);
+    }
+
+    public static void testBuyMaterials_classcast() throws Exception {
+        Material m = new Material(MaterialStock.BRICKSTONE.name(), 1000, "Stone") {
+        };
+        Material m1 = new Brickstone(m);
+        System.out.println(m.getClass());
+        System.out.println(m1.getClass());
+
+        Class<?> clazz = Class.forName(MaterialStock.BRICKSTONE.name());
+        Constructor<?> ctor = clazz.getConstructor(String.class, double.class, String.class);
+        Object object = ctor.newInstance(new Object[]{MaterialStock.BRICKSTONE.name(), 1000, "Stone"});
+
+        System.out.println(object);
+        System.out.println(object.getClass());
+    }
 
     public static void testInstanceOf() {
         Object employee1 = new HR("sdfasdf", "adfasdfsadf");
